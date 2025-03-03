@@ -18,7 +18,7 @@ const nextConfig: NextConfig = {
    basePath: isProd ? "/nextjs-github-pages" : "",
 
 
-   assetPrefix: isProd ? "/nextjs-github-pages/" : "",
+   assetPrefix: isProd ? "/nextjs-github-pages" : "",
 
    trailingSlash: true,
  
