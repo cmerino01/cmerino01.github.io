@@ -19,6 +19,8 @@ const nextConfig: NextConfig = {
 
 
    assetPrefix: isProd ? "/nextjs-github-pages/" : "",
+
+   trailingSlash: true,
  
    /**
     * Disable server-based image optimization. Next.js does not support
