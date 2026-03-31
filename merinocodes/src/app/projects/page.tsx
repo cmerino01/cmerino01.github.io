@@ -26,6 +26,14 @@ const projects = [
     url: "https://github.com/cmerino01/FPGA_Game",
     demo: "https://youtu.be/yEGT6yfvHiE",
   },
+  {
+    id: "04",
+    title: "GameThemeMusic-NG",
+    tags: ["SteamOS", "Linux", "TypeScript"],
+    description:
+      "A Decky Loader plugin for the Steam Deck that plays theme music for your games.",
+    url: "https://github.com/cmerino01/GameThemeMusic-NG",
+  },
 ];
 
 export default function Projects() {
