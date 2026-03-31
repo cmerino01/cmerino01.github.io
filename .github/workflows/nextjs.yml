@@ -4,6 +4,8 @@ on:
   push:
     branches: ["main"]
   workflow_dispatch:
+  schedule:
+    - cron: "0 6 * * *" # Daily at 06:00 UTC — picks up new GameThemeMusic-NG releases automatically
 
 permissions:
   contents: read
@@ -56,6 +58,22 @@ jobs:
       - name: Install dependencies
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
         working-directory: ./merinocodes
+      - name: Download latest GameThemeMusic-NG release zip
+        run: |
+          # Remove the directory-based JS redirect and replace it with the real binary
+          rm -rf merinocodes/public/gamethememusic/latest.zip
+          mkdir -p merinocodes/public/gamethememusic
+          RELEASE_INFO=$(curl -s -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/cmerino01/GameThemeMusic-NG/releases/latest")
+          DOWNLOAD_URL=$(echo "$RELEASE_INFO" | \
+            jq -r '.assets[] | select(.name | endswith(".zip")) | .browser_download_url' | head -1)
+          if [ -n "$DOWNLOAD_URL" ] && [ "$DOWNLOAD_URL" != "null" ]; then
+            curl -L -o merinocodes/public/gamethememusic/latest.zip "$DOWNLOAD_URL"
+            echo "Downloaded zip from: $DOWNLOAD_URL"
+          else
+            echo "No zip asset found in latest release"
+            exit 1
+          fi
       - name: Build with Next.js
         run: ${{ steps.detect-package-manager.outputs.runner }} next build
         working-directory: ./merinocodes
