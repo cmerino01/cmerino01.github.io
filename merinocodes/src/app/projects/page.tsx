@@ -34,6 +34,14 @@ const projects = [
       "A Decky Loader plugin for the Steam Deck that plays theme music for your games.",
     url: "https://github.com/cmerino01/GameThemeMusic-NG",
   },
+  {
+    id: "05",
+    title: "DualSense Companion",
+    tags: ["Stream Deck", "TypeScript", "Windows"],
+    description:
+      "A Stream Deck plugin that puts your DualSense or DualSense Edge controller info right on your deck — battery level, connection status, firmware version, stick drift monitor, and LED color control.",
+    url: "https://marketplace.elgato.com/product/dualsense-companion-af6d93a0-a897-4656-8c6a-604190452059",
+  },
 ];
 
 export default function Projects() {
